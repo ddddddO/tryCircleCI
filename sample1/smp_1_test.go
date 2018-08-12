@@ -5,7 +5,7 @@ import(
 )
 
 func TestRetName(t *testing.T){
-	actual := RetName("ddddddO")
+	actual := RetName("dddddd")
 	expect := "ddddddOです。宜しくお願いいたします。"
 	if actual != expect {
 		t.Errorf("actual: %v\necept: %v", actual, expect)
