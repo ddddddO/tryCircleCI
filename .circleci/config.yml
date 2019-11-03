@@ -11,8 +11,6 @@ jobs:
     steps:
       - checkout
 
-      - run: go get -v -t -d ./...
-      - run: go test -v ./...
       - run: 
           name: Run test
           command: |
