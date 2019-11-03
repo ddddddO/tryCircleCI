@@ -5,22 +5,24 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version
       - image: circleci/golang:1.13
       
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-    #### TEMPLATE_NOTE: go expects specific checkout path representing url
-    #### expecting it in the form of
-    ####   /go/src/github.com/circleci/go-tool
-    ####   /go/src/bitbucket.org/circleci/go-tool
     working_directory: /go/src/github.com/ddddddO/tryCircleCI
     steps:
       - checkout
 
-      # specify any bash command here prefixed with `run: `
       - run: go get -v -t -d ./...
       - run: go test -v ./...
+      - run: 
+          name: Run test
+          command: |
+            cd ./cmd/ci-test/
+            go mod download
+            go test -v
+
+      - run:
+          name: Output coverage
+          command: |
+            cd ./cmd/ci-test/
+            go test -coverprofile=cover.out
+            go tool cover -html=cover.out -o cover.html
