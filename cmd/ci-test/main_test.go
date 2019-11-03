@@ -17,7 +17,7 @@ func TestClient_Get(t *testing.T) {
 		//{"failed pattern(client error)", "http://xxxx.com", 200, true},
 	}
 
-	cli := NewClient("0.0.0", "test")
+	cli := NewClient("0.0.1", "test")
 	for _, tt := range tests {
 		status, err := cli.Get(tt.endpoint)
 		if status != tt.wantStatus || (err != nil) != tt.wantErr {
